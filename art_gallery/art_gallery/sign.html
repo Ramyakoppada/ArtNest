@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="sign_up.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+</head>
+<body>
+    <div class="background">
+        <div class="wrapper">
+            <form action="#" onsubmit="return validateForm()">
+                <h1>Sign Up</h1>
+                <div class="input-box">
+                    <input type="text" placeholder="Username" id="name" required>
+                    <em class="fa fa-user"></em>
+                </div>
+                <div class="input-box">
+                    <input type="email" placeholder="Email" id="email" required>
+                    <em class="fa fa-envelope"></em>
+                </div>
+                <div class="input-box">
+                    <input type="password" placeholder="Password" id="pwd" class="password-field" required>
+                    <span id="togglePassword" class="eye-icon"><i class="fas fa-eye"></i></span>
+                </div>
+                <div class="input-box">
+                    <input type="password" placeholder="Confirm Password" id="confirmPwd" class="password-field" required>
+                    <span id="toggleConfirmPassword" class="eye-icon"><i class="fas fa-eye"></i></span>
+                </div>
+                <button type="submit" class="btn">Sign Up</button>
+                <div class="registration-link">
+                    <br><p>Already have an account? <a href="login.html">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="checkmark"><i class="fas fa-check"></i></div>
+            <p class="success-message">Sign Up Successful!</p>
+            <p>You can now login with your credentials.</p>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var pwd = document.getElementById('pwd').value;
+            var confirmPwd = document.getElementById('confirmPwd').value;
+
+            var nameRegex = /^[a-zA-Z\s]+$/;
+            var pwdRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()\-+.]).{8,20}$/;
+
+            if (!nameRegex.test(name)) {
+                alert('Enter a valid name');
+                return false;
+            } else if (name.length < 3) {
+                alert('Name must have at least 3 characters');
+                return false;
+            }
+
+            if (!validateEmail(email)) {
+                alert('Enter a valid email address');
+                return false;
+            }
+
+            if (!pwdRegex.test(pwd)) {
+                alert('Password must contain at least one number, one uppercase and lowercase letter, and at least 8 characters');
+                return false;
+            }
+
+            if (pwd !== confirmPwd) {
+                alert('Passwords do not match');
+                return false;
+            }
+
+            
+            showSuccessModal();
+
+            return false; 
+        }
+
+        function validateEmail(email) {
+            var re = /\S+@\S+\.\S+/;
+            return re.test(email);
+        }
+
+        function showSuccessModal() {
+            var modal = document.getElementById('successModal');
+            modal.style.display = 'block';
+
+            var closeBtn = modal.querySelector('.close');
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+
+            
+            closeBtn.addEventListener('click', function() {
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('pwd').value = '';
+                document.getElementById('confirmPwd').value = '';
+            });
+
+            
+            setTimeout(function() {
+                modal.style.display = 'none';
+            }, 3000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const passwordField = document.getElementById('pwd');
+            const confirmPasswordField = document.getElementById('confirmPwd');
+            const togglePassword = document.getElementById('togglePassword');
+            const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+            const icon = togglePassword.querySelector('i');
+            const confirmIcon = toggleConfirmPassword.querySelector('i');
+
+            togglePassword.addEventListener('click', () => {
+                togglePasswordField(passwordField, icon);
+            });
+
+            toggleConfirmPassword.addEventListener('click', () => {
+                togglePasswordField(confirmPasswordField, confirmIcon);
+            });
+        });
+
+        function togglePasswordField(field, icon) {
+            const type = field.getAttribute('type') === 'password' ? 'text' : 'password';
+            field.setAttribute('type', type);
+
+            if (type === 'password') {
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            } else {
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            }
+        }
+    </script>
+</body>
+</html>
