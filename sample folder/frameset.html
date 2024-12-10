@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px 40px;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 1.2em;
+        }
+        .navbar .logo h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        .navbar .user-icon {
+            position: relative;
+            cursor: pointer;
+        }
+        .navbar .user-icon i {
+            font-size: 24px;
+            color: white;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            z-index: 1000;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .dropdown-menu li {
+            padding: 10px;
+            cursor: pointer;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .dropdown-menu li:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .container {
+            display: flex;
+            height: calc(100% - 90px);
+        }
+        .menu {
+            width: 15%;
+            background-color: #fff;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .content {
+            width: 85%;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #fff;
+            border-left: 1px solid #eee;
+        }
+        .hidden {
+            display: none;
+        }
+        form input[type="text"],
+        form textarea,
+        form input[type="file"],
+        form input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+        form input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        form input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <h1>Artist Dashboard</h1>
+        </div>
+        <div class="user-icon" onclick="toggleDropdown()">
+            <i class="fas fa-user"></i>
+            <ul class="dropdown-menu" id="dropdown-menu">
+                <li onclick="showSettings()">Settings</li>
+                <li onclick="logout()">Logout</li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <div class="menu">
+            <iframe src="bottom.html" style="width: 100%; height: 100%; border: none;"></iframe>
+        </div>
+        <div class="content">
+            <div id="upload" class="hidden">
+                <h2>Upload Arts</h2>
+                <form>
+                    <label for="artTitle">Art Title:</label><br>
+                    <input type="text" id="artTitle" name="artTitle"><br><br>
+                    <label for="artDescription">Art Description:</label><br>
+                    <textarea id="artDescription" name="artDescription"></textarea><br><br>
+                    <label for="artFile">Upload File:</label><br>
+                    <input type="file" id="artFile" name="artFile"><br><br>
+                    <input type="submit" value="Upload">
+                </form>
+            </div>
+            <div id="view" class="hidden">
+                <h2>View Arts</h2>
+                <p>List of uploaded arts will be displayed here.</p>
+            </div>
+            <div id="settings" class="hidden">
+                <h2>Settings</h2>
+                <p>Settings content goes here.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleDropdown() {
+            var menu = document.getElementById('dropdown-menu');
+            menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function showSettings() {
+            showContent('settings');
+            toggleDropdown(); // Hide the dropdown after clicking
+        }
+
+        function logout() {
+            alert('Logging out...');
+            // Implement logout functionality
+            toggleDropdown(); // Hide the dropdown after clicking
+        }
+
+        function showContent(contentId) {
+            var contents = document.querySelectorAll('.content > div');
+            contents.forEach(content => {
+                content.classList.add('hidden');
+            });
+            document.getElementById(contentId).classList.remove('hidden');
+        }
+
+        // Close the dropdown if clicked outside
+        window.onclick = function(event) {
+            if (!event.target.closest('.user-icon')) {
+                var dropdowns = document.getElementsByClassName("dropdown-menu");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === 'block') {
+                        openDropdown.style.display = 'none';
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

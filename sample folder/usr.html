@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .icon-lg {
+            font-size: 3em; /* Adjust the font-size as needed */
+        }
+    </style>
+    <title>Head</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #34495e; 
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .heading {
+            font-size: 24px;
+        }
+        
+        .icon {
+            font-size: 24px;
+            margin-left: 10px;
+        }
+        
+      /* Dropdown menu */
+       .dropdown {
+          display: none;
+          position: absolute;
+          top: 6px;
+          right: 60px;
+          background-color: #fff;
+          border: 1px solid #ccc;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          border-radius: 5px;
+          z-index: 1;
+        }
+
+        .dropdown a {
+          display: block;
+          padding:2px;
+          text-decoration: none;
+          color:#34495e;
+        }
+
+      .dropdown a:hover {
+        background-color: #f0f0f0;
+      }
+  </style>
+  </head>
+<body>
+    <div class="heading">Artist Dashboard</div>
+    <!-- <div class="icon"> <i class="fas fa-user-circle icon-lg"></i></div> -->
+    <div class="user-icon" onclick="toggleDropdown()">
+      <i class="fas fa-user-circle icon-lg"></i>
+      <!-- Dropdown content -->
+      <div id="dropdown" class="dropdown">
+        <a href="#"><i class="fas fa-user-circle"></i>   Edit Profile</a>
+        <a href="#"><i class="fas fa-cog"></i>  Settings</a>
+        <!-- <a href="#"><i class="fas fa-question-circle"></i>  Help & Support</a> -->
+        <!-- <a href="#"><i class="fas fa-moon"></i> Display & Accessibility</a> -->
+        <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i>  Logout</a>
+      </div>
+    </div>
+  </div>
+  
+  
+  <script>
+  // Function to toggle dropdown menu
+  function toggleDropdown() {
+    var dropdown = document.getElementById('dropdown');
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+  }
+  
+  // Function to perform logout (replace with actual logout logic)
+  function logout() {
+    alert('Logging out...'); // Replace with actual logout logic
+    // Example: redirect to logout endpoint or clear session data
+  }
+  </script>
+</body>
+</html>
