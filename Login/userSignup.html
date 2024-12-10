@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="userLogin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .error {
+            color: red;
+            font-size: 14px;
+            display: none;
+        }
+        .success {
+            color: green;
+            font-size: 14px;
+            display: none;
+        }
+        .eye-icon {
+            cursor: pointer;
+        }
+        .input-box {
+            position: relative;
+        }
+        .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="wrapper">
+            <form action="userSignup.php" method="post" onsubmit="return validateForm()">
+                <h1>Sign Up</h1>
+                <div class="input-box">
+                    <input type="text" placeholder="Username" id="name" name="username" required>
+                    <em class="fa fa-user"></em>
+                    <span class="error" id="nameError">Enter a valid name with letters, numbers, underscores, or dots (min 3 characters).</span>
+                </div>
+                <div class="input-box">
+                    <input type="email" placeholder="Email" id="email" name="email" required>
+                    <em class="fa fa-envelope"></em>
+                    <span class="error" id="emailError">Enter a valid email address.</span>
+                </div>
+                <div class="input-box">
+                    <input type="password" placeholder="Password" id="pwd" class="password-field" name="password" required>
+                    <span id="togglePassword" class="eye-icon"><i class="fas fa-eye"></i></span>
+                    <span class="error" id="pwdError">Password must be 8-20 characters with letters, numbers, and special characters.</span>
+                </div>
+                <div class="input-box">
+                    <input type="password" placeholder="Confirm Password" id="confirmPwd" class="password-field" required>
+                    <span id="toggleConfirmPassword" class="eye-icon"><i class="fas fa-eye"></i></span>
+                    <span class="error" id="confirmPwdError">Passwords do not match.</span>
+                    <span class="success" id="confirmPwdSuccess">Passwords match.</span>
+                </div>
+                <button type="submit" class="btn">Sign Up</button>
+                <div class="registration-link">
+                    <br><p>Already have an account? <a href="userLogin.html">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        function validateForm() {
+            let isValid = true;
+            const username = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('pwd').value;
+            const confirmPassword = document.getElementById('confirmPwd').value;
+
+            const usernamePattern = /^[a-zA-Z0-9._]{3,}$/;
+            if (!usernamePattern.test(username)) {
+                document.getElementById('nameError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('nameError').style.display = 'none';
+            }
+
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                document.getElementById('emailError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('emailError').style.display = 'none';
+            }
+
+            if (password.length < 8 || password.length > 20) {
+                document.getElementById('pwdError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('pwdError').style.display = 'none';
+            }
+
+            if (password !== confirmPassword || confirmPassword != password) {
+                document.getElementById('confirmPwdError').style.display = 'block';
+                document.getElementById('confirmPwdSuccess').style.display = 'none';
+                isValid = false;
+            } else if (confirmPassword) {
+                document.getElementById('confirmPwdError').style.display = 'none';
+                document.getElementById('confirmPwdSuccess').style.display = 'block';
+            }
+
+            return isValid;
+        }
+
+        document.getElementById('confirmPwd').addEventListener('input', function() {
+            const password = document.getElementById('pwd').value;
+            const confirmPassword = this.value;
+            if (password !== confirmPassword || confirmPassword != password) {
+                document.getElementById('confirmPwdError').style.display = 'block';
+                document.getElementById('confirmPwdSuccess').style.display = 'none';
+            } else {
+                document.getElementById('confirmPwdError').style.display = 'none';
+                document.getElementById('confirmPwdSuccess').style.display = 'block';
+            }
+        });
+
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordField = document.getElementById('pwd');
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            this.querySelector('i').classList.toggle('fa-eye');
+            this.querySelector('i').classList.toggle('fa-eye-slash');
+        });
+
+        document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+            const confirmPasswordField = document.getElementById('confirmPwd');
+            const type = confirmPasswordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmPasswordField.setAttribute('type', type);
+            this.querySelector('i').classList.toggle('fa-eye');
+            this.querySelector('i').classList.toggle('fa-eye-slash');
+        });
+    </script>
+</body>
+</html>
