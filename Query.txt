@@ -1,0 +1,99 @@
+#artist request table
+
+CREATE TABLE IF NOT EXISTS artist_request (
+    username VARCHAR(255) NOT NULL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(15) NOT NULL,
+    experience INT NOT NULL,
+    awards TEXT,
+    about TEXT NOT NULL,
+    submission_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+#artist table
+CREATE TABLE artist (
+    username VARCHAR(255) NOT NULL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    phone VARCHAR(15) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    experience TEXT,
+    awards TEXT,
+    about TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+#art_uploads
+CREATE TABLE art_uploads (
+    product_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    art_name VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    date DATE NOT NULL,
+    type_of_art VARCHAR(255) NOT NULL,
+    other_type VARCHAR(255),
+    picture VARCHAR(255) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE IF NOT EXISTS admin (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+#to store all orders
+CREATE TABLE art_requests (
+    request_id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT NOT NULL,
+    username VARCHAR(255) NOT NULL,  -- This is the user who made the request
+    artist_username VARCHAR(255) NOT NULL,  -- This is the artist of the art
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(15) NOT NULL,
+    pincode VARCHAR(6) NOT NULL,
+    flat_number VARCHAR(255) NOT NULL,
+    street VARCHAR(255) NOT NULL,
+    landmark VARCHAR(255) NOT NULL,
+    city VARCHAR(255) NOT NULL,
+    state VARCHAR(255) NOT NULL,
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (product_id) REFERENCES art_uploads(product_id),
+    FOREIGN KEY (artist_username) REFERENCES artists(username),  -- Reference artists table
+    FOREIGN KEY (username) REFERENCES users(username)  -- Reference users table
+);
+
+
+#to store accepted orders
+CREATE TABLE orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT NOT NULL,
+    artist_username VARCHAR(255) NOT NULL,  -- This is the artist of the art
+    username VARCHAR(255) NOT NULL,  -- This is the user who placed the order
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(15) NOT NULL,
+    pincode VARCHAR(6) NOT NULL,
+    flat_number VARCHAR(255) NOT NULL,
+    street VARCHAR(255) NOT NULL,
+    landmark VARCHAR(255) NOT NULL,
+    city VARCHAR(255) NOT NULL,
+    state VARCHAR(255) NOT NULL,
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (product_id) REFERENCES art_uploads(product_id),
+    FOREIGN KEY (artist_username) REFERENCES artists(username),  -- Reference artists table
+    FOREIGN KEY (username) REFERENCES users(username)  -- Reference users table
+);
+
+
+
+CREATE TABLE artist_rating (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    artist_username VARCHAR(50) NOT NULL,
+    rating INT NOT NULL,
+    FOREIGN KEY (artist_username) REFERENCES artist(username) ON DELETE CASCADE,
+    UNIQUE KEY unique_artist (artist_username)  -- Ensures only one rating per artist
+);
