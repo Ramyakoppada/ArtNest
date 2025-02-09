@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+
+    <title>Artist Details Form</title>
+    <style>
+        body{
+            background: url('background.jpeg') no-repeat ;
+            background-size:cover;
+            background-position: center;
+            backdrop-filter: blur(10px);
+        }
+        .heading {
+        text-align: center;
+        margin-bottom: 20px;
+        color: black;
+      }
+      .form-label {
+        color: black; 
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="d-flex flex-column min-vh-100 justify-content-center align-items-center"
+    >
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-8 m-5">
+            <form class="row shadow-lg p-3 needs-validation" action="artistRequest.php" method="post"  novalidate>
+              <div class="heading">
+                <h1 class="">ARTIST DETAILS</h1>
+              </div>
+              <div class="col-md-12 m-2">
+                <div class="row">
+                  <!-- First Name -->
+                  <div class="col">
+                    <label for="name" class="form-label"
+                      >Name <span class="text-danger">*</span></label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Name"
+                      id="name"
+                      name = "name"
+                      required
+                    />
+                    
+                  </div>
+
+
+              <div class="col-md-12 m-2">
+                <div class="row">
+                  <!-- First Name -->
+                  <div class="col">
+                    <label for="username" class="form-label"
+                      >Username <span class="text-danger">*</span></label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Username"
+                      id="Username"
+                      name = "username"
+                      required
+                    />
+                    
+                  </div>
+    
+                  
+                </div>
+              </div>
+              <!-- Email -->
+              <div class="col-md-12 m-2">
+                <label for="email" class="form-label"
+                  >Email <span class="text-danger">*</span></label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="Email"
+                  id="email"
+                  name = "email"
+                  required
+                />
+                
+              </div>
+              <!-- Phone -->
+              <div class="col-md-12 m-2">
+                <label for="phone" class="form-label"
+                  >Phone <span class="text-danger">*</span></label
+                >
+                <input
+                  type="tel"
+                  class="form-control"
+                  placeholder="Phone"
+                  id="phone"
+                  name = "phone"
+                  required
+                />
+                
+              </div>
+              <div class="col-md-12 m-2">
+                <label for="experience" class="form-label">Experience <span class="text-danger">*</span></label>
+                <div class="input-group">
+                    <input type="number" class="form-control" id="experience" required min="0" placeholder="Experience" name = "experience">
+                    <span class="input-group-text">in years</span>
+                </div>
+                
+            </div>
+            <div class="col-md-12 m-2">
+                <label for="awards" class="form-label">Awards Received (if any)</label>
+                <input type="text" class="form-control" id="awards" placeholder="Awards" name="awards">
+            </div>
+             
+              <!-- textarea -->
+              <div class="col-md-12 m-2">
+                <label for="about" class="form-label">About Yourself <span class="text-danger">*</span></label>
+                <textarea
+                  class="form-control"
+                  placeholder="About Yourself"
+                  id="about"
+                  cols="30"
+                  rows="5"
+                  name = "about"
+                  required
+                ></textarea>
+                
+              </div>
+
+              <!-- checkbox -->
+              <div class="col-md-12 m-2">
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="checkbox"
+                    required
+                  />
+                  <label for="checkbox" class="form-check-label"
+                    ><strong>The information provided is genuine and correct.</strong></label
+                  >
+                  
+                  <div class="invalid-feedback">
+                    Please agree to the terms and conditions
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12 m-2">
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="checkbox"
+                    required
+                  />
+                  
+                  <label for="checkbox" class="form-check-label">
+                    <strong>I acknowledge that 10% of every art sale will be directed to the Admin.</strong>
+                  </label>
+                  <div class="invalid-feedback">
+                    Please agree to the terms and conditions
+                  </div>
+                </div>
+              </div>
+
+              <!-- submit button -->
+              <div class="col-md-12 m-2">
+                <button id="submitBtn" class="btn btn-primary" type="submit">
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="artistLogin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+        .message {
+            color: green;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <form action="artistLogin.php" method="post">
+            <h1>Login</h1>
+            <?php if (isset($_SESSION['loginError'])): ?>
+                <div class="error">
+                    <?php
+                        echo htmlspecialchars($_SESSION['loginError']);
+                        unset($_SESSION['loginError']);
+                    ?>
+                </div>
+            <?php endif; ?>
+            <div class="input-box">
+                <input type="text" placeholder="Username" id="name" name="username" required>
+                <em class="fa fa-user"></em>
+                <span class="error"><?php if (isset($_SESSION['usernameError'])) echo htmlspecialchars($_SESSION['usernameError']); ?></span>
+            </div>
+            <div class="input-box">
+                <input type="password" placeholder="Password" id="pwd" class="password-field" name="password" required>
+                <span id="togglePassword" class="eye-icon"><i class="fas fa-eye"></i></span>
+                <span class="error"><?php if (isset($_SESSION['passwordError'])) echo htmlspecialchars($_SESSION['passwordError']); ?></span>
+            </div>
+            <div class="remember-forgot">
+                <label></label>
+                <a href="#">Forgot password?</a>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <div class="registration-link">
+                <br><p>New Artist? <a href="artistReqForm.html">Register</a></p>
+            </div>
+        </form>
+    </div>
+    <script>
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordField = document.getElementById('pwd');
+
+        togglePassword.addEventListener('click', function (e) {
+            // Toggle the type attribute using getAttribute() and setAttribute()
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+
+            // Toggle the eye / eye slash icon
+            this.querySelector('i').classList.toggle('fa-eye');
+            this.querySelector('i').classList.toggle('fa-eye-slash');
+        });
+    </script>
+</body>
+</html>
