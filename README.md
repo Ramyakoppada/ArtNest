@@ -43,7 +43,7 @@ The project aims to create a user-friendly digital platform for the art communit
 - **MySQL:** Relational database management system used for storing application data.
 - **HTML/CSS:** For building the application's front-end interface.
 - **JavaScript:** For adding interactivity to the web pages.
-- **AJAX:** For handling asynchronous requests, especially in the chat feature.
+
 
 
 ## File Structure
